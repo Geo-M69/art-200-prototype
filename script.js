@@ -4,6 +4,8 @@
 const container = document.querySelector(".tic-tac-toe-container");
 const statusEl = document.getElementById("status");
 const resetBtn = document.getElementById("reset");
+const darkModeBtn = document.getElementById("dark-mode-toggle");
+const DARK_MODE_KEY = "ultimate-tic-tac-toe-dark-mode";
 
 const boardEls = Array.from(document.querySelectorAll(".big-cell"));
 const cellElsByBoard = boardEls.map((boardEl, boardIndex) => {
@@ -32,6 +34,12 @@ if (container) {
 if (resetBtn) {
 	resetBtn.addEventListener("click", resetGame);
 }
+
+if (darkModeBtn) {
+	darkModeBtn.addEventListener("click", toggleDarkMode);
+}
+
+initializeTheme();
 
 updateUI();
 
@@ -199,4 +207,28 @@ function resetGame() {
 	gameWinner = null;
 	winningLine = null;
 	updateUI();
+}
+
+function initializeTheme() {
+	const savedPreference = localStorage.getItem(DARK_MODE_KEY);
+	const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+	const shouldUseDark = savedPreference === null ? prefersDark : savedPreference === "true";
+	applyTheme(shouldUseDark);
+}
+
+function toggleDarkMode() {
+	const isDarkMode = document.body.classList.toggle("dark-mode");
+	localStorage.setItem(DARK_MODE_KEY, String(isDarkMode));
+	updateThemeButton(isDarkMode);
+}
+
+function applyTheme(isDarkMode) {
+	document.body.classList.toggle("dark-mode", isDarkMode);
+	updateThemeButton(isDarkMode);
+}
+
+function updateThemeButton(isDarkMode) {
+	if (!darkModeBtn) return;
+	darkModeBtn.setAttribute("aria-pressed", String(isDarkMode));
+	darkModeBtn.textContent = isDarkMode ? "Light Mode" : "Dark Mode";
 }
