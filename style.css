@@ -1,0 +1,101 @@
+html {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 50%;
+    background-color: transparent;
+    gap: 1.5rem;
+}
+
+.status {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.tic-tac-toe-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.vertical-lines-tic-tac-toe {
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    background-color: black;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.vertical-lines-tic-tac-toe:nth-child(1) {
+    left: 33.33%;
+}
+
+.vertical-lines-tic-tac-toe:nth-child(2) {
+    left: 66.66%;
+}
+
+.horizontal-lines-tic-tac-toe {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: black;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.horizontal-lines-tic-tac-toe:nth-child(3) {
+    top: 33.33%;
+}
+
+.horizontal-lines-tic-tac-toe:nth-child(4) {
+    top: 66.66%;
+}
+
+.big-cell {
+    position: relative;
+    display: grid;
+    height: inherit;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    z-index: 1;
+}
+
+.big-cell div {
+    border: .5px solid gray;
+}
+
+.big-cell.active-board {
+    outline: 3px solid #111;
+    outline-offset: -3px;
+}
+
+.big-cell.inactive-board {
+    opacity: 0.35;
+}
