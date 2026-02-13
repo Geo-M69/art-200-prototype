@@ -152,8 +152,10 @@ function isBoardFull(boardArray) {
 function updateUI() {
 	boardEls.forEach((boardEl, boardIndex) => {
 		const winner = smallBoardWinners[boardIndex];
+		const isMainWin = (gameWinner === "X" || gameWinner === "O")
+			&& Boolean(winningLine && winningLine.includes(boardIndex));
 		const isActive = (gameWinner === "X" || gameWinner === "O")
-			? Boolean(winningLine && winningLine.includes(boardIndex))
+			? isMainWin
 			: gameWinner === "D"
 				? true
 				: activeBoard === null
@@ -161,9 +163,15 @@ function updateUI() {
 					: activeBoard === boardIndex;
 		boardEl.classList.toggle("active-board", isActive);
 		boardEl.classList.toggle("inactive-board", !isActive);
+		boardEl.classList.toggle("winning-board", isMainWin);
 		boardEl.classList.toggle("won-x", winner === "X");
 		boardEl.classList.toggle("won-o", winner === "O");
 		boardEl.classList.toggle("draw", winner === "D");
+		if (gameWinner === "X" || gameWinner === "O") {
+			boardEl.dataset.mainWinner = gameWinner;
+		} else {
+			delete boardEl.dataset.mainWinner;
+		}
 
 		cellElsByBoard[boardIndex].forEach((cellEl, cellIndex) => {
 			cellEl.textContent = boards[boardIndex][cellIndex] ?? "";

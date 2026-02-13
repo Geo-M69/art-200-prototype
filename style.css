@@ -20,7 +20,7 @@ main {
     align-items: center;
     justify-content: center;
     width: 30%;
-    height: 50%;
+    height: 55%;
     background-color: transparent;
     gap: 1.5rem;
 }
@@ -30,6 +30,29 @@ main {
     font-weight: 600;
     letter-spacing: 0.02em;
     text-transform: uppercase;
+}
+
+.hint {
+    font-size: 0.9rem;
+    color: #333;
+    text-align: center;
+    max-width: 28rem;
+}
+
+.reset-btn {
+    border: 2px solid #111;
+    background: transparent;
+    color: #111;
+    padding: 0.45rem 1.2rem;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+}
+
+.reset-btn:hover {
+    background: #111;
+    color: #fff;
 }
 
 .tic-tac-toe-container {
@@ -91,6 +114,18 @@ main {
     border: .5px solid gray;
 }
 
+.big-cell.active-board > div {
+    cursor: pointer;
+}
+
+.big-cell.active-board > div:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.big-cell.inactive-board > div {
+    cursor: not-allowed;
+}
+
 .big-cell.active-board {
     outline: 3px solid #111;
     outline-offset: -3px;
@@ -98,4 +133,40 @@ main {
 
 .big-cell.inactive-board {
     opacity: 0.35;
+}
+
+.big-cell.winning-board::after {
+    content: attr(data-main-winner);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #111;
+    background: rgba(0, 0, 0, 0.08);
+    pointer-events: none;
+}
+
+@media (max-width: 800px) {
+    main {
+        width: 90vw;
+        height: 80vh;
+        gap: 1rem;
+    }
+
+    .status {
+        font-size: 1rem;
+    }
+
+    .hint {
+        font-size: 0.85rem;
+        max-width: 22rem;
+    }
+
+    .reset-btn {
+        width: 100%;
+        max-width: 16rem;
+    }
 }
